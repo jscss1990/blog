@@ -1,1 +1,554 @@
-<h1>欢迎来到我的世界</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="只会切图的前端">
+    <title>超简单个人介绍网页html</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 15px;
+            color: #787878;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 左边 */
+        header {
+            width: 35%;
+            height: 100%;
+            padding: 80px 40px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            text-align: right;
+            background-color: #1f1815;
+            background-image: url(img/overlay.png), url(img/bg.jpg);
+            background-position: top left, top left;
+            background-repeat: repeat, no-repeat;
+            background-size: auto, 150%;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 17px;
+            line-height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 头像 */
+        .avatar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .user-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 底部版权 */
+        .copyright {
+            font-size: 11px;
+        }
+
+        /* 右边 */
+        .main {
+            width: 65%;
+            padding: 40px;
+            margin-left: 35%;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .word {
+            line-height: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* 项目作品 */
+        .project-main {
+            width: 100%;
+            background: #fff;
+        }
+
+        .project-box {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .project {
+            width: 45%;
+            height: auto;
+            overflow: hidden;
+            position: relative;
+            transition: all 1s ease;
+            margin-bottom: 20px;
+        }
+
+        .project img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 1s ease;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .project:hover {
+            cursor: pointer;
+        }
+
+        .project:hover img {
+            transform: scale(1.2);
+        }
+
+        .project-intro .t {
+            font-size: 20px;
+            line-height: 36px;
+            height: 36px;
+            overflow: hidden;
+        }
+
+        .project-intro .intro {
+            font-size: 13px;
+            line-height: 22px;
+            height: 44px;
+            overflow: hidden;
+        }
+
+        /* 项目作品end */
+
+        /* 技能 */
+        .skill-main {
+            width: 100%;
+            background: #fff;
+            padding: 20px 0 30px 0;
+        }
+
+        .skill-box {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .skill-li {
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill-name {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+        }
+
+        .badge {
+            padding: 3px 6px;
+            font-size: 11px;
+            text-align: center;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #787878;
+        }
+
+        /* 进度条 */
+        .progress {
+            display: flex;
+            height: 6px;
+            overflow: hidden;
+            background-color: #e9ecef;
+            border-radius: 6px;
+        }
+
+        .progress-bar {
+            width: 0;
+            background-color: #787878;
+            transition: all 1.5s ease;
+        }
+
+        /* 技能end */
+
+        .row {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -20px;
+        }
+
+        .row>* {
+            padding: 0 0 0 20px;
+        }
+
+        /* 宽度 */
+        .row>.col-12 {
+            width: 100%;
+        }
+
+        .row>.col-8 {
+            width: 66.66667%;
+        }
+
+        .row>.col-6 {
+            width: 50%;
+        }
+
+        .row>.col-4 {
+            width: 33.33333%;
+        }
+
+        /* 标题 */
+        h2 {
+            font-size: 18px;
+            line-height: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* 输入框 */
+        input[type="text"],
+        textarea {
+            width: 90%;
+            padding: 0 10px;
+            margin-bottom: 20px;
+            appearance: none;
+            background: #f7f7f7;
+            border-radius: 5px;
+            border: solid 2px transparent;
+            display: block;
+            outline: 0;
+            text-decoration: none;
+        }
+
+        input[type="text"] {
+            height: 44px;
+            line-height: 44px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            line-height: 24px;
+        }
+
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #49bf9d;
+        }
+
+        /* Button */
+
+        input[type="submit"],
+        .button {
+            width: 160px;
+            height: 50px;
+            line-height: 44px;
+            appearance: none;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            background-color: transparent;
+            border-radius: 5px;
+            border: solid 3px #ddd;
+            color: #666;
+            cursor: pointer;
+            display: inline-block;
+            padding: 0 1.5em;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        input[type="submit"]:hover,
+        .button:hover {
+            border-color: #49bf9d;
+            color: #49bf9d !important;
+        }
+
+        input[type="submit"]:active,
+        .button:active {
+            background-color: rgba(73, 191, 157, 0.1);
+            border-color: #49bf9d;
+            color: #49bf9d !important;
+        }
+
+        ul.list {
+            line-height: 30px;
+            margin-top: 20px;
+        }
+
+        ul.list li {
+            padding-bottom: 20px;
+        }
+
+        ul.list .label {
+            display: inline-block;
+            font-weight: bold;
+            padding-right: 30px;
+        }
+
+        /* 自适应 */
+        @media screen and (max-width: 1024px) {
+            header {
+                width: 100%;
+                position: relative;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            /* 宽度 */
+            .row>.col-8 {
+                width: 100%;
+            }
+
+            .row>.col-6 {
+                width: 100%;
+            }
+
+            .row>.col-4 {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 左边 -->
+    <header id="header">
+        <div class="user-box">
+            <a href="#" class="avatar">
+                <img src="img/avatar.jpg" alt="头像">
+            </a>
+            <span>
+                <b>我是只会切图的前端</b><br>
+                "一位专注于构建用户友好、响应式和高性能网页的前端开发程序员。"
+            </span>
+        </div>
+        <div class="copyright">© 版权所有 2024</div>
+    </header>
+    <!-- 右边 -->
+    <div class="main">
+        <!-- 个人介绍 -->
+        <section id="one">
+            <h2>自我介绍</h2>
+            <p class="word">
+                <font>
+                    作为一名拥有多年经验的前端开发程序员，我精通各种前端技术和框架，如HTML5、CSS3、JavaScript、React和Vue等。我擅长将复杂的设计需求转化为高质量的前端代码，为用户提供流畅且愉悦的使用体验。在项目开发中，我注重团队协作、性能优化和代码可维护性，致力于推动前端技术的创新与应用。
+                </font>
+            </p>
+            <ul class="actions">
+                <li><a href="#" class="button">
+                        <font>
+                            <font>了解更多</font>
+                        </font>
+                    </a></li>
+            </ul>
+        </section>
+        <!-- 作品 -->
+        <section class="my-project">
+            <div class="project-main">
+                <h2><span>我的项目</span></h2>
+                <div class="project-box">
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/1.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目1</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/2.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目2</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/3.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目3</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/4.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目4</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/5.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目5</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                    <div class="project">
+                        <div class="project-img">
+                            <img src="./img/6.webp" />
+                        </div>
+                        <div class="project-intro">
+                            <p class="t">项目6</p>
+                            <p class="intro">项目介绍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--作品end-->
+
+
+        <!-- 技能 -->
+        <section class="skill">
+            <div class="skill-main">
+                <div class="skill-box">
+                    <h2><span>我的技能</span></h2>
+                    <div class="skill-li">
+                        <div class="skill">
+                            <div class="skill-name">HTML+CSS
+                                <span class="badge">95%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-width="95"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill">
+                            <div class="skill-name">JavaScript
+                                <span class="badge">90%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-width="90"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill">
+                            <div class="skill-name">Vue
+                                <span class="badge">85%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-width="85"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill">
+                            <div class="skill-name">Node.js
+                                <span class="badge">80%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-width="80"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill">
+                            <div class="skill-name">MySQL
+                                <span class="badge">75%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" data-width="75"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                //动效js
+                let skillItems = document.querySelectorAll(".skill .progress-bar");
+                setTimeout(function () {
+                    skillItems.forEach(function (item) {
+                        let widthNow = item.getAttribute("data-width");
+                        if (widthNow) {
+                            item.style.width = widthNow + "%";
+                        }
+                    });
+                }, 1000)
+
+            </script>
+        </section>
+        <!--技能end-->
+        <!-- 联系我 -->
+        <section class="concat">
+            <h2>和我联系</h2>
+
+            <div class="row">
+                <div class="col-8">
+                    <form method="post" action="#">
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="text" name="name" id="name" placeholder="姓名">
+                            </div>
+                            <div class="col-6">
+                                <input type="text" name="email" id="email" placeholder="邮箱">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" id="message" placeholder="留言" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="actions">
+                        <li><input type="submit" value="提交"></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <ul class="list">
+                        <li>
+                            <span class="label">地址 </span>
+                            广东深圳
+                        </li>
+                        <li>
+                            <span class="label">电话</span>
+                            132****0000
+                        </li>
+                        <li>
+                            <span class="label">邮箱</span>
+                            ****@163.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>
